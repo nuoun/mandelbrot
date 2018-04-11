@@ -1,18 +1,4 @@
-#include "main.h"
-
-struct RGB
-{
-	int R;
-	int G;
-	int B;
-};
-
-struct HSV
-{
-	double H;
-	double S;
-	double V;
-};
+#include "function.h"
 
 struct RGB HSVToRGB(struct HSV hsv) {
 	double r = 0, g = 0, b = 0;
