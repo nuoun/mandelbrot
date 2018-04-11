@@ -1,11 +1,5 @@
 #include "main.h"
  
-#define W 800
-#define H 800
-#define M 255
-#define ITERATIONMAX 1024
-#define ESCAPE 4
- 
 uint8_t r[H][W], g[H][W], b[H][W];
 long double zoom = 1;
 
