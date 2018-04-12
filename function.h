@@ -6,9 +6,8 @@
 #include <stdint.h>
 #include <math.h>
 
-#define W 800
+#define WIDTH 800
 #define HEIGHT 800
-#define M 255
 #define ITERATIONMAX 1024
 #define ESCAPE 4
 
