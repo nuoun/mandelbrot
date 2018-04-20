@@ -13,18 +13,20 @@
 
 struct RGB
 {
-	int R;
-	int G;
-	int B;
+  int R;
+  int G;
+  int B;
 };
 
 struct HSV
 {
-	double H;
-	double S;
-	double V;
+  double H;
+  double S;
+  double V;
 };
 
 struct RGB HSVToRGB(struct HSV hsv);
+void output_frame();
+void draw_frame();
 
 #endif // MAIN_H
