@@ -2,25 +2,16 @@
 #ifndef FUNCTION_H
 #define FUNCTION_H
 
-/* save diagnostic state */
-#pragma GCC diagnostic push
-
-/* turn off the specific warning. Can also use "-Wall" */
-#pragma GCC diagnostic ignored "-Wall"
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdint.h>
 #include <math.h>
 
-/* turn the warnings back on */
-#pragma GCC diagnostic pop
-
 #define WIDTH 800
 #define HEIGHT 800
 #define ITERATIONMAX 1024
 #define ESCAPE 4
-#define LENGTH 10
+#define LENGTH 100
 
 extern char* image;
 

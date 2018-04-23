@@ -1,5 +1,6 @@
 *.mp4
 *.ppm
 *.png
+obj/
 git.sh
 mandelbrot

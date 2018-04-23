@@ -1,5 +1,5 @@
 DEBUG ?= 0
-WARNING ?= 1
+WARNING ?= 0
 CC = cc
 CFLAGS = -std=gnu99 -march=native
 RFLAGS = -Ofast -flto

@@ -1,6 +1,5 @@
 #include "function.h"
 
-char* image;
 long double zoom = 1.0;
 
 void draw_frame(int framecount)
