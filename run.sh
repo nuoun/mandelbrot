@@ -1,6 +1,6 @@
 #!/bin/bash
 make clean && make
-rm -f ./output/*
+rm -f ./output/*.ppm
 SECONDS=0
 date +"%T"
 ./mandelbrot

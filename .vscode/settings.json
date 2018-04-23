@@ -1,8 +1,0 @@
-{
-    "files.associations": {
-        "function.h": "c",
-        "type_traits": "c",
-        "cmath": "c",
-        "stdio.h": "c"
-    }
-}
