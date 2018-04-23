@@ -1,7 +1,6 @@
 #!/bin/bash
 make clean && make
-mkdir -p output
-rm -f output/*
+rm -f ./output/*
 SECONDS=0
 date +"%T"
 ./mandelbrot
