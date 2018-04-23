@@ -1,8 +1,7 @@
-.gitignore
 .vscode/
+obj/
 *.mp4
 *.ppm
 *.png
 git.sh
-obj/
 mandelbrot
