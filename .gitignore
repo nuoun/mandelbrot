@@ -1,6 +1,6 @@
 .vscode/
 obj/
-output/*
+output/*.*
 *.mp4
 *.ppm
 *.png
