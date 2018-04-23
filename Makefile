@@ -1,8 +1,8 @@
 DEBUG ?= 0
 WARNING ?= 0
 CC = cc
-CFLAGS = -std=gnu99 -march=native
-RFLAGS = -Ofast -flto
+CFLAGS = -std=gnu99
+RFLAGS = -O3
 DFLAGS = -O0 -DDebug -g
 RWARNINGS = -Werror -Wall -Wextra -Wpedantic
 DWARNINGS = -Wabi -Waggregate-return -Waggressive-loop-optimizations -Wall -Wattributes -Wbad-function-cast -Wbuiltin-macro-redefined \
@@ -49,12 +49,12 @@ OBJ = $(addprefix $(OBJDIR)/,$(notdir $(SRC:.c=.o)))
 all: $(TARGET)
 
 $(TARGET): $(OBJ)
-	@$(CC) $(CFLAGS) -o $@ $^ $(LDLIBS)
+	$(CC) $(CFLAGS) -o $@ $^ $(LDLIBS)
 	@echo "Linking complete!"
 
 $(OBJDIR)/%.o: $(SRCDIR)/%.c
 	@mkdir -p $(@D)
-	@$(CC) -c $(CFLAGS) $< -o $@
+	$(CC) -c $(CFLAGS) $< -o $@
 	@echo "Compilation complete!"
 
 .PHONY: clean
