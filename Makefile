@@ -53,7 +53,6 @@ $(TARGET): $(OBJ)
 	@echo "Linking complete"
 
 $(OBJDIR)/%.o: $(SRCDIR)/%.c
-	@mkdir -p $(@D)
 	$(CC) -c $(CFLAGS) $< -o $@
 	@echo "Compilation complete"
 
