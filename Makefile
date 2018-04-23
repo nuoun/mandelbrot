@@ -50,14 +50,14 @@ all: $(TARGET)
 
 $(TARGET): $(OBJ)
 	$(CC) $(CFLAGS) -o $@ $^ $(LDLIBS)
-	@echo "Linking complete!"
+	@echo "Linking complete"
 
 $(OBJDIR)/%.o: $(SRCDIR)/%.c
 	@mkdir -p $(@D)
 	$(CC) -c $(CFLAGS) $< -o $@
-	@echo "Compilation complete!"
+	@echo "Compilation complete"
 
 .PHONY: clean
 clean:
 	rm -f $(TARGET) $(OBJ)
-	@echo "Cleanup complete!"
+	@echo "Cleanup complete"

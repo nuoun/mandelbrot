@@ -11,9 +11,9 @@
 #define HEIGHT 800
 #define ITERATIONMAX 1024
 #define ESCAPE 4
-#define LENGTH 100
+#define LENGTH 150
 
-extern char* image;
+extern char* imagedata;
 
 struct RGB
 {
@@ -30,8 +30,8 @@ struct HSV
 };
 
 struct RGB HSVToRGB(struct HSV hsv);
-void draw_frame(int);
-void output_frame(void);
+void renderframe(int framenumber);
+void writefile(int filenumber);
 
 /* FUNCTION_H */
 #endif

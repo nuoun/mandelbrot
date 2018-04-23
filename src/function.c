@@ -1,47 +1,59 @@
 #include "function.h"
 
-long double zoom = 1.0;
-char* image;
+long double zoom = 4;
+char* imagedata;
 
-void draw_frame(int framecount)
+void renderframe(int framenumber)
 {
-    
     int i;
-    int imgidx = 0;
-    long double cx, cy, zx, zy, zx2, zy2;
+    int imagebyte = 0;
+    long double cx, cy, ox, oy, zx, zy, zx2, zy2;
     long double xmin = -2.25 * zoom;
     long double xmax = 2.25 * zoom;
     long double ymin = -2.25 * zoom;
     long double ymax = 2.25 * zoom;
     long double dx = (xmax - xmin) / WIDTH;
     long double dy = (ymax - ymin) / HEIGHT;
-
-    zoom *= 0.975;
+    float time = framenumber;
 
     /*
-    long double centerx = 0;
-    long double centery = 0;
-    long double centerx = -1.76651223650935682;
-    long double centery = 0.04171432271082462;
+    long double centerx = -1.778103342740640371;
+    long double centery = 0.00767394242121339392;
+
     long double centerx = -0.7473354651820724;
     long double centery = -0.10030992828748005;
+
     long double centerx = -1.256148879595297;
     long double centery = 0.3994106258544796;
-    long double centerx = -1.77810334274064037110522326038852639499207961414628307584575173232969154440;
-    long double centery = 0.00767394242121339392672671947893471774958985018535019684946671264012302378;
-    long double centerx = -1.76651223950935682;
-    long double centery = 0.04171432271082462;
-    */
 
     long double centerx = -1.76651223950935682;
     long double centery = 0.04171432271082462;
+
+    long double centerx = 0.29630415552937667;
+    long double centery = 0.01716992131736058;
+
+    long double centerx = 0.0;
+    long double centery = 0.0;
+    */
+
+    long double centerx = 0.37226792743827275;
+    long double centery = -0.6687312047576894;
+
+    float cost = cos(0.0075 * time);
+    float sint = sin(0.0075 * time);
+    zoom *= 0.96125;
 
     for (int y = 0; y < HEIGHT; y++)
     {
-        cy = centery + ymax - y * dy;
         for (int x = 0; x < WIDTH; x++)
         {
-            cx = centerx + xmin + x * dx;
+
+            ox = xmin + x * dx;
+            oy = ymax - y * dy;
+
+            cx = ox * cost - oy * sint + centerx;
+            cy = ox * sint + oy * cost + centery;
+
             zx = 0.0;
             zy = 0.0;
             zx2 = zx * zx;
@@ -56,37 +68,52 @@ void draw_frame(int framecount)
             }
             if (i == ITERATIONMAX)
             {
-                image[imgidx++] = 0;
-                image[imgidx++] = 0;
-                image[imgidx++] = 0;
+                imagedata[imagebyte++] = 0;
+                imagedata[imagebyte++] = 0;
+                imagedata[imagebyte++] = 0;
             }
             else
             {
                 /*
-                double z = zx + zy;
-                int smooth = 360 * log2(1.75 + i - log2(log2(z))) / log2((double)ITERATIONMAX);
-                smooth = (smooth + framecount) % 360;
+                int output = (i * 5) + framenumber % 360;
 
-                fprintf( stderr,  "%d\n\n", smooth);
+                float log_zn = log(zx2 + zy2) / 2;
+                float nu = log(log_zn / log(2)) / log(2);
+                int output = (int) i + 1 - nu;
+                output = 1 + output + framenumber % 359;
                 */
 
-                int output = (i * 5) + framecount % 360;
+                /*
+                float l = i + 1 - log2(log2(zx2+zy2)) + 4.0;
+                float output = 0.5 + 0.5 * cos(3.0 + l * 0.15);
+                output *= 360 + framenumber % 360;
+                */
 
-                struct HSV data = {output, 0.75, 0.75};
+                float modulus = sqrt (zx2 + zy2);
+                float mu = i - (log (log (modulus))) / log(2.0);
+                float output = mu * 1.5 + framenumber % 360;
+
+                struct HSV data = {output, 0.75, 1.0};
                 struct RGB value = HSVToRGB(data);
 
-                image[imgidx++] = value.R;
-                image[imgidx++] = value.G;
-                image[imgidx++] = value.B;
+                imagedata[imagebyte++] = value.R;
+                imagedata[imagebyte++] = value.G;
+                imagedata[imagebyte++] = value.B;
             }
         }
     }
 }
 
-void output_frame(void)
+void writefile(int filenumber)
 {
-    fprintf(stdout, "P6 %d %d %d\n", WIDTH, HEIGHT, 255);
-    fwrite(image, 1, WIDTH * HEIGHT * 3, stdout);
+    FILE *fp;
+    char filename[24];
+    sprintf(filename, "./output/img%d.ppm", filenumber);
+    fp = fopen(filename, "w");
+    fprintf(fp, "P6 %d %d 255\n", WIDTH, HEIGHT);
+    fwrite(imagedata, 1, WIDTH * HEIGHT * 3, fp);
+    fclose(fp);
+    printf("File %s complete\r", filename);
     fflush(stdout);
 }
 
