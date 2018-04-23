@@ -18,6 +18,8 @@ void draw_frame(int framecount)
     zoom *= 0.975;
 
     /*
+    long double centerx = 0;
+    long double centery = 0;
     long double centerx = -1.76651223650935682;
     long double centery = 0.04171432271082462;
     long double centerx = -0.7473354651820724;
@@ -30,8 +32,8 @@ void draw_frame(int framecount)
     long double centery = 0.04171432271082462;
     */
 
-    long double centerx = 0;
-    long double centery = 0;
+    long double centerx = -1.76651223950935682;
+    long double centery = 0.04171432271082462;
 
     for (int y = 0; y < HEIGHT; y++)
     {
