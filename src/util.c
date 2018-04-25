@@ -8,8 +8,6 @@ void writefile(int filenumber)
     char filename[24];
     sprintf(filename, "./output/img%d.png", filenumber);
     stbi_write_png(filename, WIDTH, HEIGHT, 3, imagedata, WIDTH * 3);
-    printf("File %s complete \r", filename);
-    fflush(stdout);
 }
 
 u_int8_t ui8min(u_int8_t *value, int length)
