@@ -1,6 +1,4 @@
 .vscode/
 *.mp4
-*.ppm
-*.png
 git.sh
 mandelbrot
