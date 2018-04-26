@@ -14,8 +14,5 @@
 extern u_int8_t imagedata[HEIGHT][WIDTH][3];
 
 void writefile(int filenumber);
-u_int8_t ui8min(u_int8_t *value, int length);
-u_int8_t ui8max(u_int8_t *value, int length);
-double dclamp(double x, double lower, double upper);
 
 #endif

@@ -1,6 +1,49 @@
 #include "color.h"
 
-void hsvtorgb(double hsv[3], u_int8_t *rgb)
+static u_int8_t
+pui8min(u_int8_t *value, int length)
+{
+    u_int8_t min = value[0];
+    for (int i = 0; i < length; i++)
+    {
+        if (value[i] < min)
+        {
+            min = value[i];
+        }
+    }
+    return min;
+}
+
+static u_int8_t
+pui8max(u_int8_t *value, int length)
+{
+    u_int8_t max = value[0];
+    for (int i = 0; i < length; i++)
+    {
+        if (value[i] > max)
+        {
+            max = value[i];
+        }
+    }
+    return max;
+}
+
+static double
+dclamp(double x, double lower, double upper)
+{
+    if (x < lower) 
+    {
+        return lower;
+    }
+    if (x > upper)
+    {
+        return upper;
+    }
+    return x;
+}
+
+void
+hsvtorgb(double hsv[3], u_int8_t *rgb)
 {
     hsv[0] = dclamp(hsv[0], 0.0, 360.0);
     hsv[1] = dclamp(hsv[1], 0.0, 1.0);
@@ -63,10 +106,11 @@ void hsvtorgb(double hsv[3], u_int8_t *rgb)
     }
 }
 
-void rgbtohsv(u_int8_t rgb[3], double *hsv)
+void
+rgbtohsv(u_int8_t rgb[3], double *hsv)
 {
-    u_int8_t int_min = ui8min(rgb, 3);
-    u_int8_t int_max = ui8max(rgb, 3);
+    u_int8_t int_min = pui8min(rgb, 3);
+    u_int8_t int_max = pui8max(rgb, 3);
     double delta;
     double min = (double)int_min / 255.0;
     double max = (double)int_max / 255.0;
@@ -75,7 +119,7 @@ void rgbtohsv(u_int8_t rgb[3], double *hsv)
     double b = (double)rgb[2] / 255.0;
     hsv[2] = max;
 
-    if (int_max == 0)
+    if (int_max == 0.0)
     {
         hsv[0] = 0.0;
         hsv[1] = 0.0; 
@@ -85,7 +129,7 @@ void rgbtohsv(u_int8_t rgb[3], double *hsv)
     {
         hsv[1] = (max - min) / max;
     }
-    if (hsv[1] == 0)
+    if (hsv[1] == 0.0)
     {
         hsv[0] = 0.0;
         return;

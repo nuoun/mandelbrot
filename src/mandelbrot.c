@@ -4,7 +4,8 @@
 long double zoom = 1.0;
 u_int8_t imagedata[HEIGHT][WIDTH][3];
 
-void renderimage(int framenumber)
+void
+renderimage(int framenumber)
 {
     int i;
     long double cx, cy, ox, oy, zx, zy, zx2, zy2;
@@ -15,9 +16,9 @@ void renderimage(int framenumber)
     long double dx = (xmax - xmin) / WIDTH;
     long double dy = (ymax - ymin) / HEIGHT;
     long double escape = 4.0;
-    long double zoomrate = 0.9;
+    long double zoomrate = 0.975;
     long double time = (long double)framenumber;
-    float iteration;
+    double iteration;
 
     /*
     long double centerx = -1.778103342740640371;
@@ -37,8 +38,7 @@ void renderimage(int framenumber)
 
     long double centerx = -0.5;
     long double centery = 0.0;
-
-*/
+    */
 
     long double centerx = 0.37226792743827275;
     long double centery = -0.6687312047576894;
@@ -96,7 +96,7 @@ void renderimage(int framenumber)
                 double modulus = sqrt(zx2 + zy2);
                 double mu = iteration - (log(log(modulus))) / log(2.0);
                 mu = mu / (double)ITERATIONMAX * 360.0;
-                double output = fmod(mu + framenumber, 360.0);
+                double output = fmod((mu * 25.0) + (double)time, 360.0);
 
                 double hsv[3] = {output, 0.75, 1};
                 u_int8_t rgb[3];
@@ -112,7 +112,8 @@ void renderimage(int framenumber)
     zoom *= zoomrate;
 }
 
-int main(void)
+int
+main(void)
 {
     for (int i = 0; i < LENGTH; i++)
     {
