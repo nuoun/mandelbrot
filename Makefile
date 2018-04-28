@@ -1,7 +1,7 @@
 DEBUG ?= 0
 WARNING ?= 0
 CC = cc
-CFLAGS = -std=gnu99
+CFLAGS = -std=gnu99 -fopenmp
 RFLAGS = -O3
 DFLAGS = -O0 -DDebug -g
 RWARNINGS = -Werror -Wall -Wextra -Wpedantic

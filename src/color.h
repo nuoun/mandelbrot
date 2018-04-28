@@ -11,8 +11,9 @@ HSV to RGB Input: double, H ∈ [0, 360] and S,V ∈ [0, 1] / Output: integer, R
 #include <stdlib.h>
 #include <stdint.h>
 #include <math.h>
+#include "util.h"
 
-void rgbtohsv(u_int8_t rgb[3], double *hsv);
-void hsvtorgb(double hsv[3], u_int8_t *rgb);
+void rgbtohsv(RGB rgb, HSV *hsv);
+void hsvtorgb(HSV hsv, RGB *rgb);
 
-#endif
+#endif /* COLOR_H */

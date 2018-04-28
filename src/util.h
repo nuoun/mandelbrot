@@ -8,11 +8,21 @@
 
 #define WIDTH 800
 #define HEIGHT 800
-#define ITERATIONMAX 1024
-#define LENGTH 50
+#define ITERATIONMAX 4000
+#define LENGTH 100
 
-extern u_int8_t imagedata[HEIGHT][WIDTH][3];
+typedef struct RGB {
+    uint8_t r;
+    uint8_t g;
+    uint8_t b;
+} RGB;
 
-void writefile(int filenumber);
+typedef struct HSV {
+    double h;
+    double s;
+    double v;
+} HSV;
 
-#endif
+void writefile(RGB imagedata[HEIGHT][WIDTH], int filenumber);
+
+#endif /* UTIL_H */
