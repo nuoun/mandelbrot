@@ -5,7 +5,7 @@ long double centerx = -0.7892360339246801;
 long double centery = 0.1506276728392605;
 long double escape = 4.0;
 long double zoom = 1;
-long double zoomrate = 1.05;
+long double zoomrate = 1.075;
 long double rotationspeed = 0.015;
 
 long double saturation = 0.75;

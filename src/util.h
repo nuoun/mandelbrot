@@ -8,7 +8,7 @@
 
 #define WIDTH 800
 #define HEIGHT 800
-#define ITERATIONMAX 4000
+#define ITERATIONMAX 1024
 #define LENGTH 100
 
 typedef struct RGB {
