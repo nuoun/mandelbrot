@@ -26,19 +26,6 @@ static uint8_t pui8max(uint8_t *value, int length)
     return max;
 }
 
-static double dclamp(double x, double lower, double upper)
-{
-    if (x < lower)
-    {
-        return lower;
-    }
-    if (x > upper)
-    {
-        return upper;
-    }
-    return x;
-}
-
 void hsvtorgb(HSV hsv, RGB *rgb)
 {
     hsv.h = dclamp(hsv.h, 0.0, 360.0);

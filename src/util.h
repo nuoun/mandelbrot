@@ -5,11 +5,12 @@
 #include <stdlib.h>
 #include <stdint.h>
 #include <math.h>
+#include <string.h>
 
-#define WIDTH 800
-#define HEIGHT 800
-#define ITERATIONMAX 1024
-#define LENGTH 100
+#define WIDTH 1920
+#define HEIGHT 1080
+#define ITERATIONMAX 65535
+#define LENGTH 1
 
 typedef struct RGB {
     uint8_t r;
@@ -23,6 +24,10 @@ typedef struct HSV {
     double v;
 } HSV;
 
+int returnmaxint(int data[HEIGHT][WIDTH]);
+double returnmaxdouble(double data[HEIGHT][WIDTH]);
+double returnmindouble(double data[HEIGHT][WIDTH]);
+double dclamp(double x, double lower, double upper);
 void writefile(RGB imagedata[HEIGHT][WIDTH], int filenumber);
 
 #endif /* UTIL_H */
