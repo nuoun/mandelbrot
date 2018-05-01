@@ -10,6 +10,7 @@
 #define WIDTH 1920
 #define HEIGHT 1080
 #define ITERATIONMAX 65535
+#define AA 4
 #define LENGTH 1
 
 typedef struct RGB {
@@ -24,7 +25,7 @@ typedef struct HSV {
     double v;
 } HSV;
 
-int returnmaxint(int data[HEIGHT][WIDTH]);
+unsigned int returnmaxint(unsigned int data[HEIGHT][WIDTH][AA]);
 double returnmaxdouble(double data[HEIGHT][WIDTH]);
 double returnmindouble(double data[HEIGHT][WIDTH]);
 double dclamp(double x, double lower, double upper);

@@ -2,16 +2,19 @@
 #define STB_IMAGE_WRITE_IMPLEMENTATION
 #include "../inc/stb_image_write.h"
 
-int returnmaxint(int data[HEIGHT][WIDTH])
+unsigned int returnmaxint(unsigned int data[HEIGHT][WIDTH][AA])
 {
-    int max = data[0][0];
+    unsigned int max = data[0][0][0];
     for (int y = 0; y < HEIGHT; y++)
     {
         for (int x = 0; x < WIDTH; x++)
         {
-            if (data[y][x] > max)
-            {
-                max = data[y][x];
+            for (int a = 0; a < AA; a++)
+            {   
+                if (data[y][x][a] > max)
+                {
+                    max = data[y][x][a];
+                }
             }
         }
     }

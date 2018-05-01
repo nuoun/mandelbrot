@@ -33,7 +33,6 @@ void hsvtorgb(HSV hsv, RGB *rgb)
     hsv.v = dclamp(hsv.v, 0.0, 1.0);
     uint8_t i;
     double p, q, t, fract;
-
     if (hsv.s == 0.0)
     {
         rgb->r = rgb->g = rgb->b = (uint8_t)floor(hsv.v * 255);
@@ -47,13 +46,11 @@ void hsvtorgb(HSV hsv, RGB *rgb)
     {
         hsv.h /= 60.0;
     }
-
     i = (uint8_t)floor(hsv.h);
     fract = hsv.h - floor(hsv.h);
     p = hsv.v * (1.0 - hsv.s);
     q = hsv.v * (1.0 - (hsv.s * fract));
     t = hsv.v * (1.0 - (hsv.s * (1.0 - fract)));
-
     if (i == 0)
     {
         rgb->r = (uint8_t)floor(hsv.v * 255);
@@ -104,7 +101,6 @@ void rgbtohsv(RGB rgb, HSV *hsv)
     double g = (double)rgb.g / 255.0;
     double b = (double)rgb.b / 255.0;
     hsv->v = max;
-
     if (int_max == 0.0)
     {
         hsv->h = 0.0;
@@ -120,9 +116,7 @@ void rgbtohsv(RGB rgb, HSV *hsv)
         hsv->h = 0.0;
         return;
     }
-
     delta = max - min;
-
     if (rgb.r == int_max)
     {
         hsv->h = (g - b) / delta;
