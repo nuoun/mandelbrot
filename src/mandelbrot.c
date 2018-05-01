@@ -69,14 +69,14 @@ void calculate(int iterationdata[HEIGHT][WIDTH], double magnitudedata[HEIGHT][WI
 
 void renderimage(int iterationdata[HEIGHT][WIDTH], double magnitudedata[HEIGHT][WIDTH], RGB imagedata[HEIGHT][WIDTH], int framenumber) 
 {
-    double iteration, hue, value, saturation, magnitudemax, magnitudemin;
-    int x, y, mostiter;
+    double iteration, hue, value;
+    int x, y, maxiter;
     HSV hsv;
     RGB rgb;
-    mostiter = returnmaxint(iterationdata);
+    maxiter = returnmaxint(iterationdata);
     #pragma omp parallel \
-    shared(iterationdata, magnitudedata, imagedata, framenumber, mostiter) \
-    private(iteration, hue, saturation, value, magnitudemax, magnitudemin, x, y, hsv, rgb)
+    shared(iterationdata, magnitudedata, imagedata, framenumber, maxiter) \
+    private(iteration, hue, value, x, y, hsv, rgb)
     {
         #pragma omp for schedule(dynamic, 1)
         for (y = 0; y < HEIGHT; y++)
@@ -89,7 +89,7 @@ void renderimage(int iterationdata[HEIGHT][WIDTH], double magnitudedata[HEIGHT][
                 }
                 else
                 {
-                    iteration = (double)iterationdata[y][x] * ((double)ITERATIONMAX / (double)mostiter);
+                    iteration = (double)iterationdata[y][x] * ((double)ITERATIONMAX / (double)maxiter);
                     magnitudedata[y][x] = iteration - (log(log(magnitudedata[y][x]))) / log (2.0);
                     magnitudedata[y][x] = 0.5 + 0.5 * cos(3 + magnitudedata[y][x] * 0.15);
                     hue = 180.0 + magnitudedata[y][x] * 90.0;
@@ -103,11 +103,6 @@ void renderimage(int iterationdata[HEIGHT][WIDTH], double magnitudedata[HEIGHT][
             }
         }
     }
-    magnitudemax = returnmaxdouble(magnitudedata);
-    magnitudemin = returnmindouble(magnitudedata);
-    printf("maxmag %f\n", magnitudemax);
-    printf("minmag %f\n", magnitudemin);
-    printf("maxit %d\n", mostiter);
 }
 
 void procesimage(RGB imagedata[HEIGHT][WIDTH])
