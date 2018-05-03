@@ -9,9 +9,12 @@
 
 #define WIDTH 1920
 #define HEIGHT 1080
-#define ITERATIONMAX 65535
-#define AA 4
 #define LENGTH 1
+#define ITERATIONMAX 65535
+#define AA 1
+#define SAMPLES 64
+#define BLUR 0
+#define VERBOSE 1
 
 typedef struct RGB {
     uint8_t r;
@@ -25,10 +28,11 @@ typedef struct HSV {
     double v;
 } HSV;
 
-unsigned int returnmaxint(unsigned int data[HEIGHT][WIDTH][AA]);
-double returnmaxdouble(double data[HEIGHT][WIDTH]);
-double returnmindouble(double data[HEIGHT][WIDTH]);
+unsigned int returnminint(unsigned int data[][WIDTH][SAMPLES]);
+unsigned int returnmaxint(unsigned int data[][WIDTH][SAMPLES]);
+double returnmindouble(double data[][WIDTH][SAMPLES]);
+double returnmaxdouble(double data[][WIDTH][SAMPLES]);
 double dclamp(double x, double lower, double upper);
-void writefile(RGB imagedata[HEIGHT][WIDTH], int filenumber);
+void writefile(RGB imagedata[][WIDTH], int filenumber);
 
 #endif /* UTIL_H */

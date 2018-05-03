@@ -31,7 +31,6 @@ void hsvtorgb(HSV hsv, RGB *rgb)
     hsv.h = dclamp(hsv.h, 0.0, 360.0);
     hsv.s = dclamp(hsv.s, 0.0, 1.0);
     hsv.v = dclamp(hsv.v, 0.0, 1.0);
-    uint8_t i;
     double p, q, t, fract;
     if (hsv.s == 0.0)
     {
@@ -46,60 +45,47 @@ void hsvtorgb(HSV hsv, RGB *rgb)
     {
         hsv.h /= 60.0;
     }
-    i = (uint8_t)floor(hsv.h);
+    uint8_t i = floor(hsv.h);
     fract = hsv.h - floor(hsv.h);
     p = hsv.v * (1.0 - hsv.s);
     q = hsv.v * (1.0 - (hsv.s * fract));
     t = hsv.v * (1.0 - (hsv.s * (1.0 - fract)));
     if (i == 0)
     {
-        rgb->r = (uint8_t)floor(hsv.v * 255);
-        rgb->g = (uint8_t)floor(t * 255);
-        rgb->b = (uint8_t)floor(p * 255);
+        rgb->r = floor(hsv.v * 255); rgb->g = floor(t * 255); rgb->b = floor(p * 255);
     }
     else if (i == 1)
     {
-        rgb->r = (uint8_t)floor(q * 255);
-        rgb->g = (uint8_t)floor(hsv.v * 255);
-        rgb->b = (uint8_t)floor(p * 255);
+        rgb->r = floor(q * 255); rgb->g = floor(hsv.v * 255); rgb->b = floor(p * 255);
     }
     else if (i == 2)
     {
-        rgb->r = (uint8_t)floor(p * 255);
-        rgb->g = (uint8_t)floor(hsv.v * 255);
-        rgb->b = (uint8_t)floor(t * 255);
+        rgb->r = floor(p * 255); rgb->g = floor(hsv.v * 255); rgb->b = floor(t * 255);
     }
     else if (i == 3)
     {
-        rgb->r = (uint8_t)floor(p * 255);
-        rgb->g = (uint8_t)floor(q * 255);
-        rgb->b = (uint8_t)floor(hsv.v * 255);
+        rgb->r = floor(p * 255); rgb->g = floor(q * 255); rgb->b = floor(hsv.v * 255);
     }
     else if (i == 4)
     {
-        rgb->r = (uint8_t)floor(t * 255);
-        rgb->g = (uint8_t)floor(p * 255);
-        rgb->b = (uint8_t)floor(hsv.v * 255);
+        rgb->r = floor(t * 255); rgb->g = floor(p * 255); rgb->b = floor(hsv.v * 255);
     }
     else
     {
-        rgb->r = (uint8_t)floor(hsv.v * 255);
-        rgb->g = (uint8_t)floor(p * 255);
-        rgb->b = (uint8_t)floor(q * 255);
+        rgb->r = floor(hsv.v * 255); rgb->g = floor(p * 255); rgb->b = floor(q * 255);
     }
 }
 
 void rgbtohsv(RGB rgb, HSV *hsv)
 {
-    void *rgbptr = &rgb;
-    uint8_t int_min = pui8min(rgbptr, 3);
-    uint8_t int_max = pui8max(rgbptr, 3);
-    double delta;
-    double min = (double)int_min / 255.0;
-    double max = (double)int_max / 255.0;
-    double r = (double)rgb.r / 255.0;
-    double g = (double)rgb.g / 255.0;
-    double b = (double)rgb.b / 255.0;
+    void *rgbp = &rgb;
+    uint8_t int_min = pui8min(rgbp, 3);
+    uint8_t int_max = pui8max(rgbp, 3);
+    double min = int_min / 255.0;
+    double max = int_max / 255.0;
+    double r = rgb.r / 255.0;
+    double g = rgb.g / 255.0;
+    double b = rgb.b / 255.0;
     hsv->v = max;
     if (int_max == 0.0)
     {
@@ -116,7 +102,7 @@ void rgbtohsv(RGB rgb, HSV *hsv)
         hsv->h = 0.0;
         return;
     }
-    delta = max - min;
+    double delta = max - min;
     if (rgb.r == int_max)
     {
         hsv->h = (g - b) / delta;
