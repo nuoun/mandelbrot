@@ -66,8 +66,8 @@ void iterate(unsigned int iterationdata[][WIDTH][SAMPLES], double magnitudedata[
                     cy = xy[1];
                     zx = 0.0;
                     zy = 0.0;
-                    zx2 = zx * zx;
-                    zy2 = zy * zy;
+                    zx2 = 0.0;
+                    zy2 = 0.0;
                     for (i = 0; i < ITERATIONMAX && (zx2 + zy2 < escape); i++)
                     {
                         zy = 2.0 * zx * zy + cy;
