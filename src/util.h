@@ -11,8 +11,9 @@
 #define HEIGHT 1080
 #define LENGTH 1
 #define ITERATIONMAX 65535
-#define AA 1
-#define SAMPLES 64
+#define AA 64
+#define SAMPLES 4
+#define NORMALIZE 0
 #define BLUR 0
 #define VERBOSE 1
 
